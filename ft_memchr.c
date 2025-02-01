@@ -3,35 +3,21 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char *str;
-	size_t i;
-	void *m =(void*)s;
-   
-	str = (unsigned char *)s;
+	unsigned char * ptr;
 
-	i = 0;
-	while (str[i] && i < n)
+	ptr = (unsigned char *)s;
+	while (n--)
 	{
-		if (str[i] == c)
-		{
-			m = &str[i];
-			return(m);
-		}
-		i++;
+		if (*ptr == (unsigned char)c)
+			return (ptr);
+		ptr++;
 	}
 	return (NULL);
 }
-
+/*
 int main()
 {
-	char ptr[] = "hellooooo";
-	char c = 'l';
-	char *p = ft_memchr(ptr ,c ,8);
-	printf("%s", p);
-
-	int arr[] = {1, 2, 3};
-	int k = 2;
-	int *int_ptr = ft_memchr(arr, k, 3);
-	printf("%
-	return 0;
+	int tab[7] = {-49, 49, 1, -1, 0, -2, 2};
+    printf("%s", (char *)ft_memchr(tab, -1, 7));
 }
+*/

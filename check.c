@@ -1,8 +1,10 @@
-#include <stdio.h>
+
+
 #include <string.h>
+#include <bsd/string.h> 
 #include "libft.h"
 
-int	main()
+int	main(void)
 {
 	/*
 	char src[] = "Worl";
@@ -62,12 +64,22 @@ int	main()
 	//
 	*/
 
-	char s[] = "abdcd";
+	char src[] = "helloooooooooo";
+	char dest[8] = "hello";
+	size_t n = strlcat(dest, src, 25);
 
-	char c = 'd';
-	char *result = strchr(s, c);
+	printf("%s\n", dest);
+	printf("%zu\n", n);
 
-	printf("result: %s", result);
+	char arr[] = "hello";
+	//printf("%zu", sizeof(arr));
+
+	int m = strncmp(dest, src, 0);
+	printf("%d\n", m);
+
+	char c = -5;
+	unsigned char mmm = (unsigned char)c;
+	printf("%c\n", mmm);
 
 	return 0;
 }
