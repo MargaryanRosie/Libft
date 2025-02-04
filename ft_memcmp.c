@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <stdio.h>
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -15,5 +16,13 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		ptr2++;
 		n--;
 	}
-	return ((unsigned char)(*ptr1 - *ptr2));
+	return (*ptr1 - *ptr2);
 }
+
+/*
+int main(void)
+{
+	printf ("%d\n", ft_memcmp("","test", 4));
+}
+
+*/
