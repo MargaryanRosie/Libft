@@ -11,55 +11,110 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <stdlib.h>
 #include <stdio.h>
 
-static int ft_word_count(char const *s, char c);
-
-char	**ft_split(char const *s, char c)
+static int ft_word_count(const char *s, char c)
 {
-	char	**ptr;
+    int count = 0;
+    int flag = 0;
 
     if (!s)
-		return (NULL);
-	size = ft_word_count(s);
-    ptr = (char**)malloc(sizeof(char*) * (size + 1));
-    if (!ptr)
-        return (NULL);
-
-
-
-}
-
-
-static  int ft_word_count(char const *s, char c)
-{
-    int i;
-    int flag;
-    int count;
-
-    i = 0;
-    flag = 0;
-    count = 0;
+        return (0);
     while (*s)
     {
-        if (*s == c)
-            s++;
-        else
+        if (*s != c && flag == 0)
         {
             count++;
-            while (*s && *s != c)
-                s++;
+            flag = 1;
         }
+        else if (*s == c)
+            flag = 0;
+        s++;
     }
     return (count);
 }
 
+static char *ft_fill_word(const char **s, char c)
+{
+    int len = 0;
+    char *word;
+    const char *start = *s;
+
+    while (**s && **s != c)
+    {
+        len++;
+        (*s)++;
+    }
+    word = (char *)malloc(sizeof(char) * (len + 1));
+    if (!word)
+        return (NULL);
+    for (int i = 0; i < len; i++)
+        word[i] = start[i];
+    word[len] = '\0';
+    return (word);
+}
+
+static void ft_free_split(char **ptr, int i)
+{
+    while (i >= 0)
+        free(ptr[i--]);
+    free(ptr);
+}
+
+static char **ft_allocate_words(const char *s, char c, int word_count)
+{
+    char **ptr = (char **)malloc(sizeof(char *) * (word_count + 1));
+    int i = 0;
+
+    if (!ptr)
+        return (NULL);
+    while (*s)
+    {
+        if (*s != c)
+        {
+            ptr[i] = ft_fill_word(&s, c);
+            if (!ptr[i])
+            {
+                ft_free_split(ptr, i - 1);
+                return (NULL);
+            }
+            i++;
+        }
+        else
+            s++;
+    }
+    ptr[i] = NULL;
+    return (ptr);
+}
+
+char **ft_split(const char *s, char c)
+{
+    int word_count;
+
+    if (!s)
+        return (NULL);
+    word_count = ft_word_count(s, c);
+    return (ft_allocate_words(s, c, word_count));
+}
+
 int main()
 {
+    char s[] = "    hello world hello world    hello      hgjf jsgj jsfgj      ";
+    char **ptr = ft_split(s, ' ');
 
-    char s[] = "hello world hello world    hello      hgjf jsgj jsfgj";
-    int n = ft_word_count(s, ' ');
+    if (!ptr)
+    {
+        printf("Memory allocation failed\n");
+        return (1);
+    }
 
-    printf ("%d\n", n);
+    for (int i = 0; ptr[i]; i++)
+        printf("%s\n", ptr[i]);
 
+    for (int i = 0; ptr[i]; i++)  
+        free(ptr[i]);
+    free(ptr);
+
+    return (0);
 }
