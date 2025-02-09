@@ -512,30 +512,136 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 
 
+#include "libft.h"
+
+static int	ft_check_set(char const c, char const *set)
+{
+	int	i;
+
+	i = 0;
+	while (set[i] != '\0')
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	size;
+	char	*new;
+
+	if (!s1 || !set)
+		return (NULL);
+	while (s1)
+	{
+		if (ft_check_set(((char)*s1), set) == 1)
+			s1++;
+		else
+			break ;
+	}
+	size = ft_strlen(s1);
+	while (size != 0)
+	{
+		if (ft_check_set(s1[size - 1], set) == 1)
+			size--;
+		else
+			break ;
+	}
+	new = (char *)malloc(size * sizeof(char) + 1);
+	if (!new)
+		return (NULL);
+	ft_strlcpy(new, (char *)s1, size + 1);
+	return (new);
+}
+
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strmapi(char const *s, char (*f)(unsigned
+int, char))
 {
-	char	*subst;
-	size_t	size;
+	unsigned int	i;
+	unsigned int	length;
+	char			*res;
 
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	size = ft_strlen(s + start);
-	if (size < len)
-		len = size;
-	subst = (char *)malloc(sizeof(char) * (len + 1));
-	if (!subst)
+	length = ft_strlen(s);
+	res = malloc(length * sizeof(char) + 1);
+	if (!res)
 		return (NULL);
-	ft_strlcpy(subst, s + start, len + 1);
-	return (subst);
+	i = 0;
+	while (i < length)
+	{
+		res[i] = (*f)(i, s[i]);
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }
 
-/*int	main()
+
+
+
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int,
+char*))
 {
-	char	str[] = "Mais um pouco e era Sub-Zero!";
-	ft_putendl_fd(ft_substr(str, 20, 30), 1);
-}*/
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+	s[i] = '\0';
+}
+
+
+
+
+#include "libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		write(fd, "-", 1);
+		nb *= -1;
+	}
+	if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putchar_fd((nb % 10) + '0', fd);
+	}
+	else
+		ft_putchar_fd(nb + '0', fd);
+}
+
+
+
+#include "libft.h"
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
