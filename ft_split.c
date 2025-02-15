@@ -10,6 +10,7 @@
 /*   Updated: 2025/02/05 16:57:51 by romargar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -98,6 +99,8 @@ char **ft_split(const char *s, char c)
     return (ft_allocate_words(s, c, word_count));
 }
 
+/*
+
 int main()
 {
     char s[] = "    hello world hello world    hello      hgjf jsgj jsfgj      ";
@@ -118,3 +121,4 @@ int main()
 
     return (0);
 }
+*/

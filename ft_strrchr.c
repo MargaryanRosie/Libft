@@ -25,7 +25,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		str++;
 	}
-	if (c == '\0')
+	if ((char)c == '\0')
 		return (str);
 	else
 		str--;
