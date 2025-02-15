@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,12 +6,12 @@
 /*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:44:50 by romargar          #+#    #+#             */
-/*   Updated: 2025/02/05 13:44:52 by romargar         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:57:31 by romargar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdio.h>
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -39,13 +38,16 @@ char	*ft_strrchr(const char *s, int c)
 }
 
 /*
-int main()
+int	main(void)
 {
-	char *str = "helloookkk";
-	char c = 'l';
+	char	*str;
+	char	c;
+	char	*ptr;
 
-	char *ptr = ft_strrchr(str, c);
+	str = "helloookkk";
+	c = 'l';
+	ptr = ft_strrchr(str, c);
 	printf("%s\n", ptr);
-	return 0;
+	return (0);
 }
 */

@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 13:31:03 by romargar          #+#    #+#             */
-/*   Updated: 2025/02/15 13:31:06 by romargar         ###   ########.fr       */
+/*   Created: 2025/02/15 15:29:53 by romargar          #+#    #+#             */
+/*   Updated: 2025/02/15 16:58:03 by romargar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_node;
+	t_list	*head;
+	t_list	*tmp;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	head = NULL;
+	while (lst)
+	{
+		tmp = ft_lstnew((*f)(lst->content));
+		if (!tmp)
+		{
+			ft_lstclear(&head, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&head, tmp);
+		lst = lst->next;
+	}
+	return (head);
 }
-
-/*
-int	main(void)
-{
-	int		a;
-	t_list	*node;
-
-	a = 24;
-	node = ft_lstnew(&a);
-	printf("%p\n", node -> content);
-	printf("%d\n", *(int*)(node -> content));
-	printf("%p\n", node -> next);
-	return (0);
-}
-*/

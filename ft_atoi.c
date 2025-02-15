@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:37:05 by romargar          #+#    #+#             */
-/*   Updated: 2025/02/05 13:37:07 by romargar         ###   ########.fr       */
+/*   Updated: 2025/02/15 13:30:06 by romargar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +16,8 @@
 int	ft_atoi(const char *nptr)
 {
 	int	i;
-	int sign;
-	int result;
+	int	sign;
+	int	result;
 
 	sign = 1;
 	result = 0;
@@ -30,11 +29,11 @@ int	ft_atoi(const char *nptr)
 		sign = -1;
 		i++;
 	}
-	else if(nptr[i] == '+')
+	else if (nptr[i] == '+')
 		i++;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result = result*10;
+		result = result * 10;
 		result = result + nptr[i] - 48;
 		i++;
 	}
@@ -42,16 +41,13 @@ int	ft_atoi(const char *nptr)
 }
 
 /*
-int main()
+int	main(void)
 {
-	char str[] = "   -3456dhdj4373";
-	int a = ft_atoi(str);
+	char	str[] = "   -3456dhdj4373";
+	int		a;
 
+	a = ft_atoi(str);
 	printf("%d", a);
-
-	return 0;
+	return (0);
 }
 */
-
-
-

@@ -1,18 +1,30 @@
-#include <stdio.h>
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 13:37:45 by romargar          #+#    #+#             */
+/*   Updated: 2025/02/15 16:39:25 by romargar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+#include "libft.h"
+#include <stdio.h>
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *ptr;
+	char	*ptr;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
 	if (start >= ft_strlen(s))
-		return ft_strdup("");
+		return (ft_strdup(""));
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	ptr = (char*)malloc(sizeof(char) * (len + 1));
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ptr)
 		return (NULL);
 	s = s + start;
@@ -26,15 +38,18 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	*ptr = '\0';
 	ptr = ptr - len;
-	return (ptr); 
+	return (ptr);
 }
 
 /*
-int main()
+int	main(void)
 {
-	char *str = "  hello   ghj aaa";
-	char *ptr = ft_substr(str, 2, 60);
+	char	*str;
+	char	*ptr;
+
+	str = "  hello   ghj aaa";
+	ptr = ft_substr(str, 2, 60);
 	printf ("%s\n", ptr);
-	return 0;
+	return (0);
 }
 */

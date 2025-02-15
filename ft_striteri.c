@@ -1,12 +1,24 @@
-#include <stdio.h>
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 16:37:32 by romargar          #+#    #+#             */
+/*   Updated: 2025/02/15 16:37:35 by romargar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ft_striteri(char *s, void (*f)(unsigned int, char*))
+#include "libft.h"
+#include <stdio.h>
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	int	i;
 
 	if (!s)
-		return;
+		return ;
 	i = 0;
 	while (s[i])
 	{
@@ -25,15 +37,12 @@ void	f_to_lower(unsigned int i, char *cptr)
 	}
 }
 
-int	main()
+int	main(void)
 {
-	char s[] = "HELLO";
-	ft_striteri(s, &f_to_lower);
+	char	s[] = "HELLO";
 
+	ft_striteri(s, &f_to_lower);
 	printf("%s\n", s);
-	return 0;
+	return (0);
 }
 */
-
-
-	

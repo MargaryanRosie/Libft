@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,13 +6,12 @@
 /*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:44:02 by romargar          #+#    #+#             */
-/*   Updated: 2025/02/05 13:44:05 by romargar         ###   ########.fr       */
+/*   Updated: 2025/02/15 13:45:00 by romargar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -33,21 +31,19 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 }
 
 /*
-int main()
+int	main(void)
 {
-	char src[] = "Hel";
-	char dst[10];
+	char	src[] = "Hel";
+	char	dst[10];
+	size_t	n;
+	size_t	n_original;
 
-	size_t n = ft_strlcpy(dst, src, 10);
-
+	n = ft_strlcpy(dst, src, 10);
 	printf("dest: %s\n", dst);
 	printf("n: %zu\n", n);
-
-	size_t n_original = strlcpy(dst, src, 10);
-
+	n_original = strlcpy(dst, src, 10);
 	printf("dest_original: %s\n", dst);
-	printf("n_original: %zu\n", n_original); 
-
-	return 0;
+	printf("n_original: %zu\n", n_original);
+	return (0);
 }
 */

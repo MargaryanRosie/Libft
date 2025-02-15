@@ -1,9 +1,19 @@
-#include <stdio.h>
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 13:30:27 by romargar          #+#    #+#             */
+/*   Updated: 2025/02/15 13:30:30 by romargar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "libft.h"
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 
 static int	size_count(int n)
 {
@@ -26,7 +36,7 @@ static void	to_str(char *str, int n, int len)
 	if (n == 0)
 	{
 		str[0] = '0';
-		return;
+		return ;
 	}
 	while (n != 0)
 	{
@@ -36,17 +46,16 @@ static void	to_str(char *str, int n, int len)
 	}
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	int	len;
+	int		len;
 	char	*str;
-	int number;
+	int		number;
 
 	len = size_count(n);
-	str = (char*)malloc(sizeof(char) * (len + 1));
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-
 	if (n == INT_MIN)
 	{
 		str[0] = '-';
@@ -68,12 +77,15 @@ char *ft_itoa(int n)
 	return (str);
 }
 /*
-int	main()
+int	main(void)
 {
-	int number = INT_MIN;
-	char *str = ft_itoa(number);
+	int		number;
+	char	*str;
+
+	number = INT_MIN;
+	str = ft_itoa(number);
 	printf("%s\n", str);
 	free(str);
-	return 0;
+	return (0);
 }
 */
