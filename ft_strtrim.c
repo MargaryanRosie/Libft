@@ -1,65 +1,49 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 13:39:48 by romargar          #+#    #+#             */
-/*   Updated: 2025/02/15 16:41:41 by romargar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
+#include <stdio.h>
 
-static int	check_set(char const *set, char c)
+static int	is_in_set(char const c, char const *set)
 {
-	if (!set)
-		return (0);
-	while (*set)
+	int	i;
+
+	i = 0;
+	while (set[i] != '\0')
 	{
-		if (*set == c)
+		if (set[i] == c)
 			return (1);
-		set++;
+		i++;
 	}
 	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	len;
-	char	*new_ptr;
-	int		i;
+	size_t	size;
+	char	*new;
 
 	if (!s1 || !set)
 		return (NULL);
-	while (*s1)
+	while (s1)
 	{
-		if (check_set(set, *s1) == 1)
+		if (is_in_set(*s1, set) == 1)
 			s1++;
 		else
 			break ;
 	}
-	len = ft_strlen(s1);
-	while (len > 0)
+	size = ft_strlen(s1);
+	while (size != 0)
 	{
-		if (check_set(set, s1[len - 1]) == 1)
-			len--;
+		if (is_in_set(s1[size - 1], set) == 1)
+			size--;
 		else
 			break ;
 	}
-	new_ptr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!new_ptr)
+	new = (char *)malloc(size * sizeof(char) + 1);
+	if (!new)
 		return (NULL);
-	i = 0;
-	while (len--)
-	{
-		new_ptr[i] = s1[i];
-		i++;
-	}
-	new_ptr[i] = '\0';
-	return (new_ptr);
+	ft_strlcpy(new, (char *)s1, size + 1);
+	return (new);
 }
+
 /*
 int	main(void)
 {

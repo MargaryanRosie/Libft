@@ -1,91 +1,62 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: romargar <romargar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 13:30:27 by romargar          #+#    #+#             */
-/*   Updated: 2025/02/15 13:30:30 by romargar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 #include <limits.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-static int	size_count(int n)
+static char	*ft_char(char *s, unsigned int number, int len)
 {
-	int	size;
-
-	size = 0;
-	if (n <= 0)
-		size++;
-	while (n != 0)
+	while (number > 0)
 	{
-		n = n / 10;
-		size++;
+		s[len--] = 48 + (number % 10);
+		number = number / 10;
 	}
-	return (size);
+	return (s);
 }
 
-static void	to_str(char *str, int n, int len)
+static long int	ft_len(int n)
 {
-	str[len] = '\0';
-	if (n == 0)
-	{
-		str[0] = '0';
-		return ;
-	}
+	int	len;
+
+	len = 0;
+	if (n <= 0)
+		len = 1;
 	while (n != 0)
 	{
-		str[len - 1] = (n % 10) + '0';
+		len++;
 		n = n / 10;
-		len--;
 	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*str;
-	int		number;
+	char			*s;
+	int				len;
+	unsigned int	number;
 
-	len = size_count(n);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
+	len = ft_len(n);
+	s = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(s))
 		return (NULL);
-	if (n == INT_MIN)
+	s[len--] = '\0';
+	if (n == 0)
+		s[0] = '0';
+	if (n < 0)
 	{
-		str[0] = '-';
-		str[1] = '2';
-		number = 147483648;
-		to_str(str + 2, number, len - 2);
-	}
-	else if (n < 0)
-	{
-		str[0] = '-';
-		number = -n;
-		to_str(str + 1, number, len - 1);
+		number = n * -1;
+		s[0] = '-';
 	}
 	else
-	{
 		number = n;
-		to_str(str, number, len);
-	}
-	return (str);
+	s = ft_char(s, number, len);
+	return (s);
 }
+
 /*
 int	main(void)
 {
-	int		number;
-	char	*str;
-
-	number = INT_MIN;
-	str = ft_itoa(number);
-	printf("%s\n", str);
-	free(str);
+	int a = INT_MIN;
+	char *s = ft_itoa(a);
+	printf("%s\n", s);
 	return (0);
 }
 */
